@@ -16,6 +16,10 @@
   <li>Fully documented types</li>
   <li>JSDoc comments for every variable and function</li>
   <li>Lightweight and efficient with zero dependencies</li>
+  <li>Automatically responds to the message or interaction letting the user know that there was a error that occured</li>
+  <li>Integrated error cleaning, no more useless stack traces for node_modules</li>
+  <li>Optional catching of every error that is emitted from the program, logs it and prevents it from crashing</li>
+  <li>In depth error logging, errors stemming from the library have specific causes. The sendError function will return ["failed", <failure_stage>] to indicate where it happened</li>
 </ul>
 
 
