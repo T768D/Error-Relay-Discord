@@ -2,11 +2,11 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "precommit",
+			"label": "bundle",
 			"type": "shell",
-			"command": "../buildTools/precommit.bat",
+			"command": "tsc -p tsconfig.json & bun ./buildTools/mimifier.mjs",
 			"options": {
-				"cwd": "${workspaceFolder}/src"
+				"cwd": "${workspaceFolder}"
 			}
 		}
 	]

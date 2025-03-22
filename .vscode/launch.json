@@ -9,12 +9,12 @@
 			"cwd": "${workspaceFolder}/${relativeFileDirname}"
 		},
 		{
-			"name": "Launch Program",
-			"program": "${workspaceFolder}/src/main.mts",
+			"name": "Bundle",
+			"program": "${workspaceFolder}/buildTools/end.mjs",
 			"request": "launch",
 			"type": "bun",
-			"cwd": "${workspaceFolder}/src",
-			"preLaunchTask": "precommit"
+			"cwd": "${workspaceFolder}",
+			"preLaunchTask": "bundle"
 		},
 		{
 			"name": "Run Tests",
