@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, type Message, type SendableChannels } from "discord.js";
+import type { ChatInputCommandInteraction, Message, SendableChannels } from "discord.js";
 
 type stages = "formatting" | "logging" | "replying";
 
@@ -35,7 +35,7 @@ export class ErrorHandler {
 
 			let formatted = "";
 			const arr = String(err instanceof Error ? err.stack : err)
-				.replace(/\(file:\/\/\/.*\/SploopMail\/|C:\\.*\\SploopMail\\/g, "  SploopMail\\")
+				.replace(/\(file:\/\/\/.*\/|C:\\.*\\/g, "  workspace\\")
 				.replace(/\( \(|<anonymous>/g, "")
 				.split("\n");
 
@@ -52,7 +52,7 @@ export class ErrorHandler {
 
 			stage = "replying";
 
-			if (message instanceof ChatInputCommandInteraction) {
+			if ("isChatInputCommand" in message) {
 
 				if (message.replied || message.deferred) {
 					const contents = await message.fetchReply();

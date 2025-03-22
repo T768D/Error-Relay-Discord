@@ -1,8 +1,14 @@
 await Bun.build({
-	entrypoints: ["../src/main.mts"],
+	entrypoints: ["../src/main.ts"],
 	outdir: "../dist",
 	env: "disable",
 	target: "bun",
-	format: "esm",
-	sourcemap: "external"
+	format: "cjs",
+	sourcemap: "external",
+	minify: {
+		whitespace: true,
+		syntax: true,
+		identifiers: true
+	},
+	bytecode: true,
 });
