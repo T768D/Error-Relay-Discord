@@ -11,6 +11,7 @@
 	],
 	"devDependencies": {
 		"@eslint/js": "^9.23.0",
+		"discord.js": "^14.18.0",
 		"eslint": "^9.23.0",
 		"globals": "^16.0.0",
 		"terser": "^5.39.0",
@@ -30,8 +31,5 @@
 	],
 	"license": "CC BY-NC-SA 4.0",
 	"private": false,
-	"type": "commonjs",
-	"dependencies": {
-		"discord.js": "^14.18.0"
-	}
+	"type": "commonjs"
 }
