@@ -10,5 +10,5 @@ await Bun.build({
 		syntax: true,
 		identifiers: true
 	},
-	bytecode: true,
+	bytecode: true
 });
