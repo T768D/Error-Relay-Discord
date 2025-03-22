@@ -6,9 +6,9 @@
 		"moduleResolution": "nodenext",
 		"resolveJsonModule": true,
 		"declaration": true,
-		"sourceMap": true,
+		"sourceMap": false,
 		"outDir": "./dist/",
-		"removeComments": true,
+		"removeComments": false,
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"noImplicitAny": true,
@@ -28,19 +28,10 @@
 		"noPropertyAccessFromIndexSignature": false,
 		"allowUnusedLabels": false,
 		"allowUnreachableCode": false,
-		"skipLibCheck": true
+		"skipLibCheck": true,
+		"strict": true
 	},
 	"include": [
 		"src/*",
-	],
-	"exclude": [
-		"dist/*",
-		"node_modules/*",
-		".vscode/*",
-		"buildTools/*",
-		"tests/*"
-	],
-	"hooks": [
-		"copy-files"
 	]
 }

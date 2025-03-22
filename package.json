@@ -1,19 +1,7 @@
 {
 	"name": "discord-error-handling",
 	"version": "1.0.0",
-	"private": false,
-	"description": "Prevents program shutdown due to erorrs, and sends clear error messages to discord.",
-	"keywords": [
-		"discord",
-		"error",
-		"error handling",
-		"program",
-		"shutdown",
-		"exit"
-	],
-	"license": "CC BY-NC-SA 4.0",
 	"author": "T768D",
-	"type": "module",
 	"main": "./src/main.mts",
 	"devDependencies": {
 		"@eslint/js": "^9.22.0",
@@ -25,7 +13,19 @@
 	"peerDependencies": {
 		"typescript": "^5.8.2"
 	},
+	"description": "Prevents program shutdown due to erorrs, and sends clear error messages to discord.",
+	"keywords": [
+		"discord",
+		"error",
+		"error handling",
+		"program",
+		"shutdown",
+		"exit"
+	],
+	"license": "CC BY-NC-SA 4.0",
+	"private": false,
+	"type": "commonjs",
 	"dependencies": {
-		"discord-api-types": "^0.37.119"
+		"discord.js": "^14.18.0"
 	}
 }
