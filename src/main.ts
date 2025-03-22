@@ -80,8 +80,8 @@ export default class ErrorHandler {
 
 		catch {
 
-			if (stage === "logging") {
-				// check if channel is right type etc
+			if (stage === "logging" && !this.channel.send) {
+				throw new Error("Channel is not a valid type! Missing function send!");
 			}
 
 			return ["failed", stage];
