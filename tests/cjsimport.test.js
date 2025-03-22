@@ -1,4 +1,4 @@
-const handler = require("../dist/main.js").default;
+const handler = require("../dist/main.js");
 
 const mockChannel = {
 	send: (msg) => console.warn("Sent: ", msg)
@@ -28,7 +28,7 @@ async function main() {
 	}
 
 	catch (err) {
-		console.error(err);
+		console.error(err.message);
 	}
 }
 

@@ -6,7 +6,7 @@ type stages = "formatting" | "logging" | "replying";
  * You only need to create a new instance of the erorr handler once to set the channel. 
  * After that just call the sendError function
 */
-export default class ErrorHandler {
+export class ErrorHandler {
 
 	/**
 	 * @param {SendableChannels} channel The channel that the error message will be sent to
@@ -87,4 +87,6 @@ export default class ErrorHandler {
 			return ["failed", stage];
 		}
 	}
-}
+};
+
+module.exports = ErrorHandler;
