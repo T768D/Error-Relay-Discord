@@ -2,12 +2,19 @@
 	"name": "discord-error-handling",
 	"version": "1.0.0",
 	"author": "T768D",
-	"main": "./src/main.mts",
+	"main": "./dist/main.js",
+	"files": [
+		"dist/",
+		"src/",
+		"tests/",
+		"eslint.config.mjs"
+	],
 	"devDependencies": {
 		"@eslint/js": "^9.23.0",
 		"@types/bun": "latest",
 		"eslint": "^9.23.0",
 		"globals": "^16.0.0",
+		"terser": "^5.39.0",
 		"typescript-eslint": "^8.27.0"
 	},
 	"peerDependencies": {
