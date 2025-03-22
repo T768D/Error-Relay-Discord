@@ -6,25 +6,30 @@
 ![VSCode](https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
 ![License](https://img.shields.io/badge/CC--BY--NC--SA--4.0-lightgrey?style=for-the-badge)
 
-# Discord Error Handler
+# __Discord Error Handler__
 
 <p style="font-size: 20px">0 Dependancy lightweight typescript library implementing error handling and error logging with discord</p>
 
-<h2>Features</h2>
-- Fully documented types
-- JSDoc comments for every variable and function
-- Lightweight and efficient with zero dependencies
+
+<h2 style="padding-top: 10px;">Features</h2>
+<ul style="list-style-type: disc; padding-left: 20px;">
+  <li>Fully documented types</li>
+  <li>JSDoc comments for every variable and function</li>
+  <li>Lightweight and efficient with zero dependencies</li>
+</ul>
 
 
-## Dev Requirements
-- Typescript
-- Terser or equivilant bundler
-- Discord.js (for types)
-- ESLint (optional)
-- Typescript ESLint (optional)
+<h2 style="padding-top: 10px;">Dev Requirements</h2>
+<ul style="list-style-type: disc; padding-left: 20px;">	
+	<li>Typescript</li>
+	<li>Terser or equivilant bundler</li>
+	<li>Discord.js (for types)</li>
+	<li>ESLint (optional)</li>
+	<li>Typescript ESLint (optional)</li>
+</ul>
 
 
-## Usage
+<h2 style="padding-top: 10px;">Usage</h2>
 
 ### Installing
 ```bash
@@ -50,10 +55,3 @@ await handler.sendError("This is a error");
 await handler.sendError("Another error", message);
 await handler.sendError("Command Interaction error!", chatInputCommand);
 ```
-
-
-<style text="css">	
-h2 {
-	padding-top: 10px;
-}
-</style>
