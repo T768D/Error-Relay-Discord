@@ -27,5 +27,5 @@ try {
 }
 
 catch (err) {
-	console.error(err);
+	console.error(err.message);
 }
