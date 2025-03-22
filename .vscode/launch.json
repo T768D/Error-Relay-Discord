@@ -18,10 +18,11 @@
 		},
 		{
 			"name": "Run Tests",
-			"program": "${workspaceFolder}/tests/main.test.mts",
+			"program": "${workspaceFolder}/buildTools/end.mjs",
 			"request": "launch",
 			"type": "bun",
-			"cwd": "${workspaceFolder}/src"
+			"cwd": "${workspaceFolder}/src",
+			"preLaunchTask": "test"
 		}
 	]
 }

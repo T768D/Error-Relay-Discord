@@ -4,9 +4,19 @@
 		{
 			"label": "bundle",
 			"type": "shell",
+			"group": "build",
 			"command": "tsc -p tsconfig.json & bun ./buildTools/mimifier.mjs",
 			"options": {
 				"cwd": "${workspaceFolder}"
+			}
+		},
+		{
+			"label": "test",
+			"type": "shell",
+			"group": "test",
+			"command": "tester.bat",
+			"options": {
+				"cwd": "${workspaceFolder}/tests"
 			}
 		}
 	]
