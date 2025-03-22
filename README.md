@@ -23,25 +23,48 @@
 </ul>
 
 
-<h2 style="padding-top: 10px;">Dev Requirements</h2>
-<ul style="list-style-type: disc; padding-left: 20px;">	
-	<li>Typescript</li>
-	<li>Terser or equivilant bundler</li>
-	<li>Discord.js (for types)</li>
-	<li>ESLint (optional)</li>
-	<li>Typescript ESLint (optional)</li>
-</ul>
+<h2 style="padding-top: 10px;">Development</h2>
+
+### <h3 style="margin-top:30px;">Installing</h3>
+```bash
+git clone https://github.com/T768D/Error-Relay-Discord
+```
+
+### <h3 style="margin-top:30px;">Dependancies</h3>
+Bun
+```bash
+bun install
+```
+
+NodeJS
+```bash
+npm install
+```
+- Bun or NodeJS or equivilent
+- Typescript
+- Terser or equivilent bundler
+- Discord.js (for types)
+- ESLint (optional)
+- Typescript ESLint (optional)
+
+### <h3 style="margin-top:30px;">Bundling</h3>
+#### VSCode: 
+- Select and Start Debugging
+- Bundle
+#### Others:
+- Run typescript `tsc -p tsconfig.json`
+- Run buildTools/mimifier.mjs
 
 
 <h2 style="padding-top: 10px;">Usage</h2>
 
-### Installing
+### <h3 style="margin-top:30px;">Installing</h3>
 ```bash
 bun install error-relay-discord
 npm install error-relay-discord
 ```
 
-### Importing
+### <h3 style="margin-top:30px;">Importing</h3>
 For CJS:
 ```js
 const errorHandler = require("error-relay-discord");
@@ -52,7 +75,7 @@ For ESM:
 import errorHandler from "error-relay-discord";
 ```
 
-### Usage
+### <h3 style="margin-top:30px;">Usage</h3>
 ```js
 const handler = new errorHandler(channelToSendErrorsTo);
 await handler.sendError("This is a error");
