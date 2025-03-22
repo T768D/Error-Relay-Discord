@@ -50,7 +50,7 @@ import errorHandler from "error-relay-discord";
 
 ### Usage
 ```js
-const handler = new discordErrorHandler(channelToSendErrorsTo);
+const handler = new errorHandler(channelToSendErrorsTo);
 await handler.sendError("This is a error");
 await handler.sendError("Another error", message);
 await handler.sendError("Command Interaction error!", chatInputCommand);
