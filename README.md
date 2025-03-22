@@ -8,7 +8,7 @@
 
 # Discord Error Handler
 
-<p style="font-size: 20px">0 Dependancy lightweight javascript library implementing error handling and error logging with discord</p>
+<p style="font-size: 20px">0 Dependancy lightweight typescript library implementing error handling and error logging with discord</p>
 
 <h2>Features</h2>
 - Fully documented types
