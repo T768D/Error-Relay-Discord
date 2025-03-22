@@ -12,19 +12,30 @@ export class ErrorHandler {
 	 * @type {SendableChannels}
 	 * @description The channel that the error message will be sent to
 	*/
-	public channel: SendableChannels;
+	public realChannel: SendableChannels;
 
 	/**
 	 * @param {SendableChannels} channel The channel that the error message will be sent to
-	 * @param {boolean} catchAllErrors This catches every single error that is emitted from the program, logs it and prevents it from stopping.
+	 * @param {boolean} catchAllErrors This catches every error that is emitted from the program, logs it and prevents it from crashing
 	*/
 	constructor(channel: SendableChannels, catchAllErrors?: boolean) {
-		this.channel = channel;
+		this.realChannel = channel;
 
 		if (catchAllErrors) {
 			process.on("unhandledRejection", this.sendError);
 			process.on("uncaughtException", this.sendError);
 		}
+	}
+
+	public get channel() {
+		return this.realChannel;
+	}
+
+	public set channel(newChannel: SendableChannels) {
+		if ("send" in newChannel && typeof newChannel.send === "function")
+			this.realChannel = newChannel;
+		else
+			console.error("Cannot change channel to a invalid variable! Variable attempted to be changed to:\n", newChannel);
 	}
 
 	/**
@@ -54,7 +65,7 @@ export class ErrorHandler {
 
 			stage = "logging";
 			console.error(err);
-			await this.channel.send(formatted);
+			await this.realChannel.send(formatted);
 
 			if (!message) return "logged";
 
@@ -87,11 +98,6 @@ export class ErrorHandler {
 		}
 
 		catch {
-
-			if (stage === "logging" && !this.channel.send) {
-				throw new Error("Channel is not a valid type! Missing function send!");
-			}
-
 			return ["failed", stage];
 		}
 	}
