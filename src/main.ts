@@ -9,15 +9,23 @@ type stages = "formatting" | "logging" | "replying";
 export class ErrorHandler {
 
 	/**
-	 * @param {SendableChannels} channel The channel that the error message will be sent to
+	 * @type {SendableChannels}
+	 * @description The channel that the error message will be sent to
 	*/
-	constructor(
-		/**
-		 * @type {SendableChannels}
-		 * @description The channel that the error message will be sent to
-		*/
-		public channel: SendableChannels
-	) { }
+	public channel: SendableChannels;
+
+	/**
+	 * @param {SendableChannels} channel The channel that the error message will be sent to
+	 * @param {boolean} catchAllErrors This catches every single error that is emitted from the program, logs it and prevents it from stopping.
+	*/
+	constructor(channel: SendableChannels, catchAllErrors?: boolean) {
+		this.channel = channel;
+
+		if (catchAllErrors) {
+			process.on("unhandledRejection", this.sendError);
+			process.on("uncaughtException", this.sendError);
+		}
+	}
 
 	/**
 	 * @param {unknown} err The error variable caught from the try catch, or a string detailing the error message
