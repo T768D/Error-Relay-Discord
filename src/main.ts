@@ -22,8 +22,16 @@ export class ErrorHandler {
 		this.realChannel = channel;
 
 		if (catchAllErrors) {
-			process.on("unhandledRejection", this.sendError);
-			process.on("uncaughtException", this.sendError);
+			this.sendError = this.sendError.bind(this);
+
+			process.on("unhandledRejection", (err) => {
+				this.sendError(err);
+			});
+
+			process.on("uncaughtException", (err) => {
+				console.log("sdfdsf");
+				this.sendError(err);
+			});
 		}
 	}
 
