@@ -1,4 +1,4 @@
-import type { ChatInputCommandInteraction, Message, SendableChannels } from "discord.js";
+import type { ChatInputCommandInteraction, InteractionResponse, Message, SendableChannels } from "discord.js";
 
 type stages = "formatting" | "logging" | "replying";
 
@@ -12,22 +12,22 @@ export class ErrorHandler {
 	 * @type {SendableChannels}
 	 * @description The channel that the error message will be sent to
 	*/
-	public realChannel: SendableChannels;
+	public logChannel: SendableChannels;
 
 	/**
 	 * @param {SendableChannels} channel The channel that the error message will be sent to
 	*/
 	constructor(channel: SendableChannels) {
-		this.realChannel = channel;
+		this.logChannel = channel;
 	}
 
 	public get channel() {
-		return this.realChannel;
+		return this.logChannel;
 	}
 
 	public set channel(newChannel: SendableChannels) {
 		if ("send" in newChannel && typeof newChannel.send === "function")
-			this.realChannel = newChannel;
+			this.logChannel = newChannel;
 		else
 			console.error("Cannot change channel to a invalid variable! Variable attempted to be changed to:\n", newChannel);
 	}
@@ -39,7 +39,7 @@ export class ErrorHandler {
 	 * @returns {Promise<["failed", stages | "undefinedParam"] | "logged" | "sucess">} If failed, it returns ["failed", and the stage of failure].
 	 * Otherwise it returns either sucess for a full reply and log, or logged for just the log.
 	*/
-	public async sendError(err: unknown, message?: Message | ChatInputCommandInteraction): Promise<["failed", stages | "undefinedParam"] | "logged" | "sucess"> {
+	public async sendError(err: unknown, message?: Message | ChatInputCommandInteraction): Promise<["failed", stages | "undefinedParam"] | ["logged", Message] | ["sucess", Message, Message | InteractionResponse]> {
 		if (!err) return ["failed", "undefinedParam"] as const;
 
 		let stage: stages = "formatting";
@@ -59,36 +59,43 @@ export class ErrorHandler {
 
 			stage = "logging";
 			console.error(err);
-			await this.realChannel.send(formatted);
+			const logMsg = await this.logChannel.send(formatted);
 
-			if (!message) return "logged";
+			if (!message) return ["logged", logMsg];
 
 			stage = "replying";
 
 			if ("isChatInputCommand" in message) {
 
+				let contents: Message | InteractionResponse;
+
 				if (message.replied || message.deferred) {
-					const contents = await message.fetchReply();
-					await message.editReply({
-						content: `## Something went wrong, the error has been logged. **The response below may be bugged or inaccurate** \n\n${contents.content}`,
+					const fetched = await message.fetchReply();
+					contents = await message.editReply({
+						content: `## Something went wrong, the error has been logged. **The response below may be bugged or inaccurate** \n\n${fetched.content}`,
 						components: []
 					});
 				}
 
 				else if (message.isRepliable()) {
-					await message.reply({
+					contents = await message.reply({
 						content: "Something went wrong, the error has been logged",
 						flags: "Ephemeral",
 						components: []
 					});
 				}
+
+				else {
+					return ["failed", stage];
+				}
+
+				return ["sucess", logMsg, contents];
 			}
 
 			else {
-				await message.reply("Something went wrong, the error has been logged");
+				const reply = await message.reply("Something went wrong, the error has been logged");
+				return ["sucess", logMsg, reply];
 			}
-
-			return "sucess";
 		}
 
 		catch {
