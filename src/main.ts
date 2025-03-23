@@ -16,23 +16,9 @@ export class ErrorHandler {
 
 	/**
 	 * @param {SendableChannels} channel The channel that the error message will be sent to
-	 * @param {boolean} catchAllErrors This catches every error that is emitted from the program, logs it and prevents it from crashing
 	*/
-	constructor(channel: SendableChannels, catchAllErrors?: boolean) {
+	constructor(channel: SendableChannels) {
 		this.realChannel = channel;
-
-		if (catchAllErrors) {
-			this.sendError = this.sendError.bind(this);
-
-			process.on("unhandledRejection", (err) => {
-				this.sendError(err);
-			});
-
-			process.on("uncaughtException", (err) => {
-				console.log("sdfdsf");
-				this.sendError(err);
-			});
-		}
 	}
 
 	public get channel() {

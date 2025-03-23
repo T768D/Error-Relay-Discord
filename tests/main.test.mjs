@@ -29,11 +29,3 @@ try {
 catch (err) {
 	console.error(err.message);
 }
-
-
-
-new errorHandler(mockChannel, true);
-
-throw new Error("lsdkfjlsjfksdl");
-
-console.log("This should be logged!");
