@@ -4,6 +4,9 @@ import { readFileSync, writeFileSync } from "fs";
 const result = await minify(readFileSync("./dist/main.js", "utf-8"), {
 	compress: true,
 	toplevel: true,
+	format: {
+		comments: false
+	}
 });
 
 if (!result.code)

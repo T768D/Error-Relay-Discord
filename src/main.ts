@@ -9,13 +9,12 @@ type stages = "formatting" | "logging" | "replying";
 export class ErrorHandler {
 
 	/**
-	 * @type {SendableChannels}
 	 * @description The channel that the error message will be sent to
 	*/
 	public logChannel: SendableChannels;
 
 	/**
-	 * @param {SendableChannels} channel The channel that the error message will be sent to
+	 * @param channel The channel that the error message will be sent to
 	*/
 	constructor(channel: SendableChannels) {
 		this.logChannel = channel;
@@ -33,11 +32,11 @@ export class ErrorHandler {
 	}
 
 	/**
-	 * @param {unknown} err The error variable caught from the try catch, or a string detailing the error message
-	 * @param {Message | ChatInputCommandInteraction | undefined} message The interaction or message that will be replied to that caused the error
+	 * @param err The error variable caught from the try catch, or a string detailing the error message
+	 * @param message The interaction or message that will be replied to that caused the error
 	 * 
-	 * @returns {Promise<["failed", stages | "undefinedParam"] | "logged" | "sucess">} If failed, it returns ["failed", and the stage of failure].
-	 * Otherwise it returns either sucess for a full reply and log, or logged for just the log.
+	 * @returns If failed, it returns ["failed", and the stage of failure].
+	 * Otherwise it returns a array with [sucess, the sent log message, the interaction response]
 	*/
 	public async sendError(err: unknown, message?: Message | ChatInputCommandInteraction): Promise<["failed", stages | "undefinedParam"] | ["logged", Message] | ["sucess", Message, Message | InteractionResponse]> {
 		if (!err) return ["failed", "undefinedParam"] as const;
