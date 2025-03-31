@@ -22,6 +22,6 @@ export declare class ErrorHandler {
      * @returns If failed, it returns ["failed", and the stage of failure].
      * Otherwise it returns a array with [sucess, the sent log message, the interaction response]
     */
-    sendError(err: unknown, message?: Message | ChatInputCommandInteraction): Promise<["failed", stages | "undefinedParam"] | ["logged", Message] | ["sucess", Message, Message | InteractionResponse]>;
+    sendError(err: unknown, message?: Message | ChatInputCommandInteraction): Promise<["failed", stages | "undefinedError"] | ["logged", Message] | ["loggedReplied", Message, Message | InteractionResponse]>;
 }
 export {};
