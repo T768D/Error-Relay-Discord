@@ -64,6 +64,7 @@ export class ErrorHandler {
 
 			stage = "replying";
 
+
 			if ("isChatInputCommand" in message) {
 
 				let contents: Message | InteractionResponse;
@@ -95,6 +96,7 @@ export class ErrorHandler {
 				const reply = await message.reply("Something went wrong, the error has been logged");
 				return ["loggedReplied", logMsg, reply];
 			}
+
 		}
 
 		catch {
