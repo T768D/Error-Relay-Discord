@@ -8,7 +8,7 @@
 
 # __Discord Error Handler__
 
-<p style="font-size: 20px">0 dependancy lightweight typescript library implementing error handling and error logging with discord</p>
+<p style="font-size: 20px">0 dependancy lightweight typescript library implementing error handling and logging with discord</p>
 
 
 <h2 style="padding-top: 10px;">Features</h2>
@@ -18,9 +18,39 @@
   <li>Lightweight and efficient with zero dependencies</li>
   <li>Automatically responds to the message or interaction letting the user know that there was a error that occured</li>
   <li>Integrated error cleaning, no more useless stack traces for node_modules</li>
-  <li>Optional catching of every error that is emitted from the program, logs it and prevents it from crashing</li>
-  <li>In depth error logging, errors stemming from the library have specific causes. The sendError function will return ["failed", <failure_stage>] to indicate where it happened</li>
+  <li>In depth logging for errors stemming from the library. The function will return ["failed", (failure stage)] to indicate where it happened</li>
 </ul>
+
+
+
+<h2 style="padding-top: 10px;">Usage</h2>
+
+### <h3 style="margin-top:30px;">Installing</h3>
+```bash
+bun install error-relay-discord
+npm install error-relay-discord
+```
+
+### <h3 style="margin-top:30px;">Importing</h3>
+For CJS:
+```js
+const errorHandler = require("error-relay-discord");
+```
+
+For ESM:
+```js
+import errorHandler from "error-relay-discord";
+```
+
+### <h3 style="margin-top:30px;">Usage</h3>
+The second parameter takes in anything with a reply function, so it can respond to messages or commands that caused the error
+```js
+const handler = new errorHandler(channelToSendErrorsTo);
+await handler.sendError("This is a error");
+await handler.sendError("Another error", messageToReplyTo);
+await handler.sendError("Command Interaction error!", chatInputCommand);
+```
+
 
 
 <h2 style="padding-top: 10px;">Development</h2>
@@ -54,31 +84,3 @@ npm install
 #### Others:
 - Run typescript `tsc -p tsconfig.json`
 - Run buildTools/mimifier.mjs
-
-
-<h2 style="padding-top: 10px;">Usage</h2>
-
-### <h3 style="margin-top:30px;">Installing</h3>
-```bash
-bun install error-relay-discord
-npm install error-relay-discord
-```
-
-### <h3 style="margin-top:30px;">Importing</h3>
-For CJS:
-```js
-const errorHandler = require("error-relay-discord");
-```
-
-For ESM:
-```js
-import errorHandler from "error-relay-discord";
-```
-
-### <h3 style="margin-top:30px;">Usage</h3>
-```js
-const handler = new errorHandler(channelToSendErrorsTo);
-await handler.sendError("This is a error");
-await handler.sendError("Another error", message);
-await handler.sendError("Command Interaction error!", chatInputCommand);
-```

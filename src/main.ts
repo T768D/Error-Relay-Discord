@@ -38,8 +38,8 @@ export class ErrorHandler {
 	 * @returns If failed, it returns ["failed", and the stage of failure].
 	 * Otherwise it returns a array with [sucess, the sent log message, the interaction response]
 	*/
-	public async sendError(err: unknown, message?: Message | ChatInputCommandInteraction): Promise<["failed", stages | "undefinedParam"] | ["logged", Message] | ["sucess", Message, Message | InteractionResponse]> {
-		if (!err) return ["failed", "undefinedParam"] as const;
+	public async sendError(err: unknown, message?: Message | ChatInputCommandInteraction): Promise<["failed", stages | "undefinedError"] | ["logged", Message] | ["loggedReplied", Message, Message | InteractionResponse]> {
+		if (!err) return ["failed", "undefinedError"] as const;
 
 		let stage: stages = "formatting";
 
@@ -88,12 +88,12 @@ export class ErrorHandler {
 					return ["failed", stage];
 				}
 
-				return ["sucess", logMsg, contents];
+				return ["loggedReplied", logMsg, contents];
 			}
 
 			else {
 				const reply = await message.reply("Something went wrong, the error has been logged");
-				return ["sucess", logMsg, reply];
+				return ["loggedReplied", logMsg, reply];
 			}
 		}
 
