@@ -4,12 +4,12 @@
 	"author": "T768D",
 	"main": "./dist/main.js",
 	"devDependencies": {
-		"@eslint/js": "^9.24.0",
-		"discord.js": "^14.18.0",
-		"eslint": "^9.24.0",
+		"@eslint/js": "^9.25.1",
+		"discord.js": "^14.19.1",
+		"eslint": "^9.25.1",
 		"globals": "^16.0.0",
 		"terser": "^5.39.0",
-		"typescript-eslint": "^8.29.0"
+		"typescript-eslint": "^8.31.0"
 	},
 	"peerDependencies": {
 		"typescript": "^5.8.2"
