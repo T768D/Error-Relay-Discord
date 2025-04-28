@@ -17,11 +17,13 @@ export declare class ErrorHandler {
     set channel(newChannel: SendableChannels);
     /**
      * @param err The error variable caught from the try catch, or a string detailing the error message
-     * @param message The interaction or message that will be replied to that caused the error
+     * @param message The interaction or message that will be replied to the user that caused the error
+     * @param extraMsg Extra message that will be sent along with the errro message when sending the error to the log channel
+     * @param customReply Custom reply message that will be replied to the user that caused the error
      *
      * @returns If failed, it returns ["failed", and the stage of failure].
      * Otherwise it returns a array with [sucess, the sent log message, the interaction response]
     */
-    sendError(err: unknown, message?: Message | ChatInputCommandInteraction): Promise<["failed", stages | "undefinedError"] | ["logged", Message] | ["loggedReplied", Message, Message | InteractionResponse]>;
+    sendError(err: unknown, message?: Message | ChatInputCommandInteraction, extraMsg?: string, customReply?: string): Promise<["failed", stages | "undefinedError"] | ["logged", Message] | ["loggedReplied", Message, Message | InteractionResponse]>;
 }
 export {};

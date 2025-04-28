@@ -33,12 +33,14 @@ export class ErrorHandler {
 
 	/**
 	 * @param err The error variable caught from the try catch, or a string detailing the error message
-	 * @param message The interaction or message that will be replied to that caused the error
+	 * @param message The interaction or message that will be replied to the user that caused the error
+	 * @param extraMsg Extra message that will be sent along with the errro message when sending the error to the log channel
+	 * @param customReply Custom reply message that will be replied to the user that caused the error
 	 * 
 	 * @returns If failed, it returns ["failed", and the stage of failure].
 	 * Otherwise it returns a array with [sucess, the sent log message, the interaction response]
 	*/
-	public async sendError(err: unknown, message?: Message | ChatInputCommandInteraction): Promise<["failed", stages | "undefinedError"] | ["logged", Message] | ["loggedReplied", Message, Message | InteractionResponse]> {
+	public async sendError(err: unknown, message?: Message | ChatInputCommandInteraction, extraMsg?: string, customReply?: string): Promise<["failed", stages | "undefinedError"] | ["logged", Message] | ["loggedReplied", Message, Message | InteractionResponse]> {
 		if (!err) return ["failed", "undefinedError"] as const;
 
 		let stage: stages = "formatting";
@@ -58,7 +60,7 @@ export class ErrorHandler {
 
 			stage = "logging";
 			console.error(err);
-			const logMsg = await this.logChannel.send(formatted);
+			const logMsg = await this.logChannel.send(extraMsg ? `${extraMsg}\n` : "" + formatted);
 
 			if (!message) return ["logged", logMsg];
 
@@ -72,14 +74,14 @@ export class ErrorHandler {
 				if (message.replied || message.deferred) {
 					const fetched = await message.fetchReply();
 					contents = await message.editReply({
-						content: `## Something went wrong, the error has been logged. **The response below may be bugged or inaccurate** \n\n${fetched.content}`,
+						content: `${customReply || "## Something went wrong, the error has been logged."} **The response below may be bugged or inaccurate** \n_ _\n${fetched.content}`,
 						components: []
 					});
 				}
 
 				else if (message.isRepliable()) {
 					contents = await message.reply({
-						content: "Something went wrong, the error has been logged",
+						content: customReply || "Something went wrong, the error has been logged",
 						flags: "Ephemeral",
 						components: []
 					});
