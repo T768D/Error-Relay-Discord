@@ -5,10 +5,7 @@ type stages = "formatting" | "logging" | "replying";
  * After that just call the sendError function
 */
 export declare class ErrorHandler {
-    /**
-     * @description The channel that the error message will be sent to
-    */
-    logChannel: SendableChannels;
+    #private;
     /**
      * @param channel The channel that the error message will be sent to
     */

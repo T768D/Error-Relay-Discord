@@ -11,22 +11,22 @@ export class ErrorHandler {
 	/**
 	 * @description The channel that the error message will be sent to
 	*/
-	public logChannel: SendableChannels;
+	#logChannel: SendableChannels;
 
 	/**
 	 * @param channel The channel that the error message will be sent to
 	*/
 	constructor(channel: SendableChannels) {
-		this.logChannel = channel;
+		this.#logChannel = channel;
 	}
 
 	public get channel() {
-		return this.logChannel;
+		return this.#logChannel;
 	}
 
 	public set channel(newChannel: SendableChannels) {
 		if ("send" in newChannel && typeof newChannel.send === "function")
-			this.logChannel = newChannel;
+			this.#logChannel = newChannel;
 		else
 			console.error("Cannot change channel to a invalid variable! Variable attempted to be changed to:\n", newChannel);
 	}
@@ -60,7 +60,7 @@ export class ErrorHandler {
 
 			stage = "logging";
 			console.error(err);
-			const logMsg = await this.logChannel.send(extraMsg ? `${extraMsg}\n` : "" + formatted);
+			const logMsg = await this.#logChannel.send(extraMsg ? `${extraMsg}\n` : "" + formatted);
 
 			if (!message) return ["logged", logMsg];
 
